@@ -1,0 +1,51 @@
+# --- Node.js / Backend ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnpm-debug.log
+
+# --- Frontend / React ---
+/build
+/dist
+/out
+/.next
+/node_modules/
+
+# --- Environment / Secrets ---
+.env
+.env.local
+.env.*       # like .env.production
+*.env
+
+# --- Uploaded Files ---
+uploads/
+
+# --- Logs ---
+logs/
+*.log
+*.gz
+
+# --- OS / Editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+.vscode/
+.idea/
+
+# --- Testing / Coverage ---
+coverage/
+.jest/
+*.tsbuildinfo
+
+# --- Convex ---
+.convex/
+.convex-dev/
+
+# --- Miscellaneous ---
+*.bak
+*.orig

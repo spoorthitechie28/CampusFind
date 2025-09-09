@@ -1,0 +1,167 @@
+/* Import a clean, modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Define some color variables for consistency */
+:root {
+  --primary-color: #4f46e5;
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+  --card-background: #ffffff;
+  --border-color: #dee2e6;
+}
+
+/* Apply base styles to the whole page */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Basic styling for form elements */
+input, select, textarea, button {
+    font-family: 'Inter', sans-serif;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    margin-top: 4px;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #4338ca;
+}
+
+button:disabled {
+    background-color: #a5b4fc;
+    cursor: not-allowed;
+}
+
+/* Simple container to center our content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ... existing global styles ... */
+
+/* Dashboard Specific Styles */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.report-button {
+  background-color: #10b981; /* A nice green color */
+}
+
+.report-button:hover {
+  background-color: #059669;
+}
+
+.items-section {
+  margin-bottom: 2.5rem;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Item Card Styling */
+.item-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Ensures the image corners are rounded */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* This prevents the image from being stretched */
+}
+
+.item-card-content {
+  padding: 1rem;
+}
+
+.item-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.item-card-content p {
+  margin: 0.25rem 0;
+  color: #6c757d;
+}
+
+.item-card-content .item-description {
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Status badge styling */
+.status-lost, .status-found {
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.status-lost {
+  background-color: #ef4444; /* Red */
+}
+
+.status-found {
+  background-color: #22c55e; /* Green */
+}
+
+.item-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.item-image-placeholder {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9ecef;
+  color: #6c757d;
+  font-weight: 500;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
