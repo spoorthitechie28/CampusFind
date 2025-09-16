@@ -1,15 +1,17 @@
 import React from 'react';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
+import { useUser } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom'; // Import Link to create clickable buttons
 
 function Dashboard() {
+  const { user } = useUser();
   const items = useQuery(api.items.getItems);
 
   const lostItems = items?.filter((item) => item.type === 'lost');
   const foundItems = items?.filter((item) => item.type === 'found');
 
-  // Helper function to format the date
-  const formatDate = (timestamp) => { // Changed from isoString to timestamp
+  const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -17,17 +19,23 @@ function Dashboard() {
     });
   };
 
+  if (items === undefined) {
+    return <div>Loading items...</div>;
+  }
+
   return (
-    <div className="container">
+    <div className="dashboard-container">
+      <div className="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back, {user?.firstName || 'User'}! Here are the latest reported items.</p>
+      </div>
+
       <div className="dashboard-section">
-        <div className="dashboard-header">
-          <h2>Lost Items</h2>
-        </div>
+        <h2>Lost Items</h2>
         <div className="items-grid">
           {lostItems && lostItems.length > 0 ? (
             lostItems.map((item) => (
               <div key={item._id} className="item-card">
-                {/* --- DISPLAY IMAGE HERE --- */}
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.itemName} className="item-image" />
                 ) : (
@@ -41,8 +49,13 @@ function Dashboard() {
                   <p>
                     <strong>Location:</strong> {item.location}
                   </p>
-                  {/* --- CORRECTED LINE --- */}
                   <span className="item-date">Lost on: {formatDate(item._creationTime)}</span>
+                </div>
+                {/* --- THIS IS THE NEW PART --- */}
+                <div className="item-card-footer">
+                  <Link to={`/item/${item._id}`} className="contact-button">
+                    View Details & Contact Owner
+                  </Link>
                 </div>
               </div>
             ))
@@ -53,14 +66,11 @@ function Dashboard() {
       </div>
 
       <div className="dashboard-section">
-        <div className="dashboard-header">
-          <h2>Found Items</h2>
-        </div>
+        <h2>Found Items</h2>
         <div className="items-grid">
           {foundItems && foundItems.length > 0 ? (
             foundItems.map((item) => (
               <div key={item._id} className="item-card">
-                {/* --- DISPLAY IMAGE HERE --- */}
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.itemName} className="item-image" />
                 ) : (
@@ -74,8 +84,13 @@ function Dashboard() {
                   <p>
                     <strong>Location:</strong> {item.location}
                   </p>
-                   {/* --- CORRECTED LINE --- */}
                   <span className="item-date">Found on: {formatDate(item._creationTime)}</span>
+                </div>
+                {/* --- THIS IS THE NEW PART --- */}
+                <div className="item-card-footer">
+                  <Link to={`/item/${item._id}`} className="contact-button">
+                    View Details & Contact Owner
+                  </Link>
                 </div>
               </div>
             ))
