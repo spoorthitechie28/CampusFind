@@ -4,9 +4,9 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 // You can find sample images on sites like unsplash.com or pexels.com
 // For now, we'll use placeholders.
-const placeholderImage1 = "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-const placeholderImage2 = "https://images.pexels.com/photos/326461/pexels-photo-326461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-const placeholderImage3 = "https://images.pexels.com/photos/163064/play-stone-network-networked-163064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+const placeholderImage1 = "https://media.istockphoto.com/id/466715441/photo/passenger-leaving-change-purse-on-seat-of-bus.webp?a=1&b=1&s=612x612&w=0&k=20&c=RWEmr-IiByTLu6WzDdzQOp5qA1iT0DC0_W0OupR9OHs=";
+const placeholderImage2 = "https://images.unsplash.com/photo-1669636527162-538cd666d89d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGxvc3QlMjBhbmQlMjBmb3VuZHxlbnwwfHwwfHx8MA%3D%3D";
+const placeholderImage3 = "https://plus.unsplash.com/premium_photo-1661297433665-870517c1cf6f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG9zdCUyMGFuZCUyMGZvdW5kfGVufDB8fDB8fHww";
 
 function Home() {
   return (

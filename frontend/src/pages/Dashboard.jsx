@@ -8,8 +8,8 @@ function Dashboard() {
   const { user } = useUser();
   const items = useQuery(api.items.getItems);
 
-  const lostItems = items?.filter((item) => item.type === 'lost');
-  const foundItems = items?.filter((item) => item.type === 'found');
+  const lostItems = items?.filter((item) => item.type === 'lost' && item.status === 'Available');
+  const foundItems = items?.filter((item) => item.type === 'found' && item.status === 'Available');
 
   const formatDate = (timestamp) => {
     return new Date(timestamp).toLocaleDateString('en-US', {
@@ -26,7 +26,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <h1>Dashboard</h1>
+        <h1>Lost & Found Board</h1>
         <p>Welcome back, {user?.firstName || 'User'}! Here are the latest reported items.</p>
       </div>
 

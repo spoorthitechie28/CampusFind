@@ -77,12 +77,12 @@ export const getItem = query({
   },
 });
 
-// --- Send a message to the item owner ---
+// --- Send a message ---
 export const sendMessage = mutation({
   args: {
     text: v.string(),
     itemId: v.id("items"),
-    toUserId: v.string(), // The Clerk ID of the person who owns the item
+    toUserId: v.string(),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -90,7 +90,7 @@ export const sendMessage = mutation({
 
     // This logic allows replying. A user can send a message
     // to another user, but not to themselves if they are the original sender.
-    if (identity.subject === args.toUserId) {
+     if (identity.subject === args.toUserId) {
        const item = await ctx.db.get(args.itemId);
        // The owner of an item cannot initiate a conversation on their own item.
        if(item.clerkUserId === identity.subject) {
@@ -101,20 +101,20 @@ export const sendMessage = mutation({
     await ctx.db.insert("messages", {
       text: args.text,
       itemId: args.itemId,
-      fromUserId: identity.subject, // The logged-in user is the sender
+      fromUserId: identity.subject,
       toUserId: args.toUserId,
     });
   },
 });
 
-// --- FINAL, CORRECTED VERSION FOR TWO-WAY CHAT ---
+// --- FINAL VERSION for two-way chat ---
 export const getMessagesForItem = query({
   args: {
     itemId: v.id("items"),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return []; // Not logged in, can't see messages
+    if (!identity) return [];
 
     const item = await ctx.db.get(args.itemId);
     if (!item) throw new Error("Item not found.");
@@ -124,16 +124,61 @@ export const getMessagesForItem = query({
       .withIndex("by_itemId", (q) => q.eq("itemId", args.itemId))
       .collect();
 
-    // The item owner can see all messages from everyone
     if (item.clerkUserId === identity.subject) {
       return allMessages;
     }
 
-    // A non-owner can see the full conversation they are having with the owner
     return allMessages.filter(
       (msg) =>
         (msg.fromUserId === identity.subject && msg.toUserId === item.clerkUserId) ||
         (msg.fromUserId === item.clerkUserId && msg.toUserId === identity.subject)
     );
+  },
+});
+
+// --- NEW: Update an item's status to "Claimed" ---
+export const updateItemStatus = mutation({
+  args: {
+    itemId: v.id("items"),
+    status: v.string(), // "Claimed" or "Available"
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("You must be logged in.");
+
+    const item = await ctx.db.get(args.itemId);
+    if (!item) throw new Error("Item not found.");
+
+    if (item.clerkUserId !== identity.subject) {
+      throw new Error("You are not authorized to modify this item.");
+    }
+
+    await ctx.db.patch(args.itemId, { status: args.status });
+  },
+});
+
+// --- NEW: Delete an item ---
+export const deleteItem = mutation({
+  args: {
+    itemId: v.id("items"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("You must be logged in.");
+
+    const item = await ctx.db.get(args.itemId);
+    if (!item) throw new Error("Item not found.");
+
+    if (item.clerkUserId !== identity.subject) {
+      throw new Error("You are not authorized to delete this item.");
+    }
+
+    // Also delete messages associated with the item
+    const messages = await ctx.db.query("messages").withIndex("by_itemId", q => q.eq("itemId", args.itemId)).collect();
+    for (const message of messages) {
+        await ctx.db.delete(message._id);
+    }
+
+    await ctx.db.delete(args.itemId);
   },
 });
