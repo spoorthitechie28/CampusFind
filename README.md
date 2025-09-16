@@ -3,6 +3,11 @@
 
 CampusFind is a modern, full-stack web application designed to be the central hub for any college campus's lost and found needs. It provides a seamless and efficient digital platform for students and staff to report lost items, post found items, and connect securely to reunite belongings with their rightful owners.
 
+# 🌐 Live Demo
+You can view the live, deployed application here:
+
+https://campus-find-eight.vercel.app/
+
 ## ✨ Features
 
   * **Report Lost & Found Items**: A simple and intuitive form allows users to report items, including details like name, category, location, a description, and an optional image upload.
