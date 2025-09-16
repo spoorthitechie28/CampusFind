@@ -9,8 +9,8 @@ function Dashboard() {
   const foundItems = items?.filter((item) => item.type === 'found');
 
   // Helper function to format the date
-  const formatDate = (isoString) => {
-    return new Date(isoString).toLocaleDateString('en-US', {
+  const formatDate = (timestamp) => { // Changed from isoString to timestamp
+    return new Date(timestamp).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -41,7 +41,8 @@ function Dashboard() {
                   <p>
                     <strong>Location:</strong> {item.location}
                   </p>
-                  <span className="item-date">Lost on: {formatDate(item.createdAt)}</span>
+                  {/* --- CORRECTED LINE --- */}
+                  <span className="item-date">Lost on: {formatDate(item._creationTime)}</span>
                 </div>
               </div>
             ))
@@ -73,7 +74,8 @@ function Dashboard() {
                   <p>
                     <strong>Location:</strong> {item.location}
                   </p>
-                  <span className="item-date">Found on: {formatDate(item.createdAt)}</span>
+                   {/* --- CORRECTED LINE --- */}
+                  <span className="item-date">Found on: {formatDate(item._creationTime)}</span>
                 </div>
               </div>
             ))
@@ -87,4 +89,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-

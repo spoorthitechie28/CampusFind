@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { SignIn, SignUp, SignedIn, SignedOut, UserButton, useUser } from "@clerk/clerk-react";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+// --- UserProfile is now imported from Clerk ---
+import { SignIn, SignUp, SignedIn, SignedOut, UserButton, UserProfile } from "@clerk/clerk-react";
 
-// Import your page components (we will create these next)
+// Import your page components
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import ReportItem from './pages/ReportItem';
@@ -27,7 +28,8 @@ function AppNavbar() {
                 <Link className="nav-link" to="/report">Report Item</Link>
               </li>
                <li className="nav-item">
-                <Link className="nav-link" to="/profile">Profile</Link>
+                {/* Changed "Profile" to "My Items" for clarity */}
+                <Link className="nav-link" to="/profile">My Items</Link>
               </li>
             </SignedIn>
              <li className="nav-item">
@@ -86,6 +88,18 @@ export default function App() {
             element={
               <SignedIn>
                 <Profile />
+              </SignedIn>
+            }
+          />
+          {/* --- THIS IS THE NEW CODE --- */}
+          {/* This route adds the user profile management page */}
+          <Route
+            path="/user"
+            element={
+              <SignedIn>
+                <div className="d-flex justify-content-center">
+                  <UserProfile />
+                </div>
               </SignedIn>
             }
           />

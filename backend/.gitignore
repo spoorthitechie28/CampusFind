@@ -49,3 +49,7 @@ coverage/
 # --- Miscellaneous ---
 *.bak
 *.orig
+# --- Convex ---
+.convex/
+.convex-dev/
+frontend/convex/_generated/

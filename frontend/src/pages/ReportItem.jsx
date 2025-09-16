@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function ReportItem() {
   // Convex hooks
   const generateUploadUrl = useMutation(api.items.generateUploadUrl); // still a mutation
-  const createItem = useAction(api.items.createItem); // ✅ must use useAction
+  const createItem = useMutation(api.items.createItem); // Now a mutation
   const navigate = useNavigate();
 
   // Form state

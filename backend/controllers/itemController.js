@@ -3,7 +3,7 @@ const Item = require('../models/Item');
 // @desc    Create a new item
 // @route   POST /api/items
 // @access  Private (called by Convex)
-exports.createItem = async (req, res) => {
+const createItem = async (req, res) => {
   try {
     const { clerkUserId, type, itemName, category, description, location, imageUrl } = req.body;
 
@@ -32,7 +32,7 @@ exports.createItem = async (req, res) => {
 // @desc    Get all items
 // @route   GET /api/items
 // @access  Public
-exports.getAllItems = async (req, res) => {
+const getAllItems = async (req, res) => {
   try {
     const items = await Item.find().sort({ createdAt: -1 }); // Get newest items first
     res.status(200).json(items);
@@ -45,7 +45,7 @@ exports.getAllItems = async (req, res) => {
 // @desc    Update an item's status to "Claimed"
 // @route   PUT /api/items/:id/claim
 // @access  Private (called by Convex)
-exports.claimItem = async (req, res) => {
+const claimItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
 
@@ -65,7 +65,7 @@ exports.claimItem = async (req, res) => {
 // @desc    Delete an item
 // @route   DELETE /api/items/:id
 // @access  Private (called by Convex)
-exports.deleteItem = async (req, res) => {
+const deleteItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
 
@@ -81,3 +81,12 @@ exports.deleteItem = async (req, res) => {
   }
 };
 
+
+// --- THIS IS THE IMPORTANT PART ---
+// We now export all functions in a single object
+module.exports = {
+  createItem,
+  getAllItems,
+  claimItem,
+  deleteItem,
+};

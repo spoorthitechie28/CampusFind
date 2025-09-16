@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
+// --- THIS IS THE NEW LINE ---
+// Import the Bootstrap CSS file to fix layout issues
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Import Convex and Clerk providers
 import { ConvexReactClient } from "convex/react";
 import { ClerkProvider, useAuth } from "@clerk/clerk-react"; // <-- Import useAuth here
@@ -26,4 +30,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ClerkProvider>
   </React.StrictMode>,
 )
-
