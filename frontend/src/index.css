@@ -693,3 +693,33 @@ main.container-fluid {
   line-height: 1.6;
   color: #4a5568;
 }
+
+
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-images {
+    /* Optional: you might want to adjust the images for mobile */
+    margin-top: 2rem;
+    transform: scale(0.9); /* Slightly scale down the images */
+  }
+
+  /* Make the auth layout stack vertically */
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-image-side {
+    margin-right: 0;
+    margin-bottom: 2rem;
+    min-height: 250px; /* Adjust height for mobile */
+  }
+
+  /* Adjust grid columns for dashboard items */
+  .items-grid {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+}
