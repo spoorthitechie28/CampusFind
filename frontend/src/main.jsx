@@ -6,6 +6,7 @@ import './index.css'
 // --- THIS IS THE NEW LINE ---
 // Import the Bootstrap CSS file to fix layout issues
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 // Import Convex and Clerk providers
 import { ConvexReactClient } from "convex/react";
