@@ -6,7 +6,7 @@ CampusFind is a modern, full-stack web application designed to be the central hu
 # 🌐 Live Demo
 You can view the live, deployed application here:
 
-https://campus-find-eight.vercel.app/
+(https://campusfind-1-tr5u.onrender.com)
 
 ## ✨ Features
 
